@@ -355,7 +355,7 @@ static THD_FUNCTION(adc_thread, arg) {
 
 		case ADC_CTRL_TYPE_CURRENT_NOREV_BRAKE_ADC:
 		case ADC_CTRL_TYPE_CURRENT_REV_BUTTON_BRAKE_ADC:
-			pwr -= brake;
+			// pwr -= brake; // Commented out line to prevent activating the break with the torque signal
 			break;
 
 		case ADC_CTRL_TYPE_CURRENT_REV_BUTTON:
