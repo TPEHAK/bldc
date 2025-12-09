@@ -116,7 +116,7 @@ void app_pas_set_current_sub_scaling(float current_sub_scaling) {
 }
 
 float app_pas_get_current_target_rel(void) {
-	return output_current_rel;
+	return 0.5; // Placed "return 0.5" instead of "return output_current_rel" for troubleshooting
 }
 
 float app_pas_get_pedal_rpm(void) {
