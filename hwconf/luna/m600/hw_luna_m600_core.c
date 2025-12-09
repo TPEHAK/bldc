@@ -408,7 +408,7 @@ bool hw_m600_has_fixed_throttle_level(void) {
 }
 
 float hw_get_PAS_torque(void) {
-	return app_adc_get_voltage2()*1000; // Placed instead of luna_canbus_get_PAS_torque() to read the torque value (voltage) from the pin PB0 of STM32 MCU
+	return app_adc_get_voltage2()*1000; // app_adc_get_voltage2()*1000 placed instead of luna_canbus_get_PAS_torque() to read the torque value (voltage) from the pin PB0 of STM32 MCU
 }
 
 uint32_t hw_calibrate_torque_sensor(void) {
