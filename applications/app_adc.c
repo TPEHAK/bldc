@@ -188,7 +188,7 @@ static THD_FUNCTION(adc_thread, arg) {
 		}
 
 		// Read the external ADC pin voltage
-		float pwr = ADC_VOLTS(ADC_IND_EXT);
+		float pwr = ADC_VOLTS(ADC_IND_EXT); // WORK IN PROGRESS! Original line is "float pwr = ADC_VOLTS(ADC_IND_EXT)"
 
 		// Override pwr value, when used from LISP
 		if (adc_detached == 1 || adc_detached == 2) {
@@ -355,7 +355,7 @@ static THD_FUNCTION(adc_thread, arg) {
 
 		case ADC_CTRL_TYPE_CURRENT_NOREV_BRAKE_ADC:
 		case ADC_CTRL_TYPE_CURRENT_REV_BUTTON_BRAKE_ADC:
-			// pwr -= brake; // Commented out line to prevent activating the break with the torque signal
+			// pwr -= brake; // WORK IN PROGRESS! Commented out line to prevent activating the break with the torque signal
 			break;
 
 		case ADC_CTRL_TYPE_CURRENT_REV_BUTTON:
