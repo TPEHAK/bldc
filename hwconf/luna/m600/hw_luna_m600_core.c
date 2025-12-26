@@ -408,8 +408,18 @@ bool hw_m600_has_fixed_throttle_level(void) {
 }
 
 float hw_get_PAS_torque(void) {
-	return (app_adc_get_voltage2() - 0.75) * 0.8; // WORK IN PROGRESS! Original line is "return luna_canbus_get_PAS_torque()"
-}
+	    static float smoothed_torque = 0.0f; // WORK IN PROGRESS! Asymmetric decay code start. Original line is "return luna_canbus_get_PAS_torque()"
+
+	    float raw_torque = (app_adc_get_voltage2() - 0.75f) * 1.33f; // 0.75 is torque sensor voltage at 0 torque (slightly higher). 1.33 is scaling ratio to scale the torque sensor voltage in between 0 and 1
+	    if (raw_torque < 0) raw_torque = 0;
+
+        if (raw_torque > smoothed_torque) {
+	        smoothed_torque += 1.0f * (raw_torque - smoothed_torque); // Ramping coefficient is here (closer to 1 fasted response)
+	    } else {
+	        smoothed_torque += 0.01f * (raw_torque - smoothed_torque); // Decay coefficient is here (closed to 0 longer the torque decay process)
+	    }
+	    return smoothed_torque;
+} // WORK IN PROGRESS! Asymmetric decay code end.
 
 uint32_t hw_calibrate_torque_sensor(void) {
 	eeprom_var sensor_offset;
